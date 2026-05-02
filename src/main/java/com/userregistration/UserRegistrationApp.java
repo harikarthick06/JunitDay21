@@ -62,5 +62,24 @@ public class UserRegistrationApp {
         } catch (InvalidUserDetailException e) {
             System.out.println("Validation failed: " + e.getMessage());
         }
+
+        System.out.println("\n===== UC4: Mobile Validation =====");
+        System.out.println("Mobile '91 9919819801' Valid: " + validator.isValidMobile("91 9919819801"));
+        System.out.println("Mobile '44 1234567890' Valid: " + validator.isValidMobile("44 1234567890"));
+        System.out.println("Mobile '9919819801' Valid: " + validator.isValidMobile("9919819801"));
+
+        try {
+            validator.validateMobile("91 9919819801");
+            System.out.println("Validation for '91 9919819801' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
+
+        try {
+            validator.validateMobile("9919819801");
+            System.out.println("Validation for '9919819801' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
     }
 }
