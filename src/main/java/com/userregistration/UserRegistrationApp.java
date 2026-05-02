@@ -42,5 +42,25 @@ public class UserRegistrationApp {
         } catch (InvalidUserDetailException e) {
             System.out.println("Validation failed: " + e.getMessage());
         }
+
+        System.out.println("\n===== UC3: Email Validation =====");
+        System.out.println("Email 'abc@bl.co.in' Valid: " + validator.isValidEmail("abc@bl.co.in"));
+        System.out.println("Email 'abc.xyz@bl.co.in' Valid: " + validator.isValidEmail("abc.xyz@bl.co.in"));
+        System.out.println("Email 'abc+xyz@bl.co.in' Valid: " + validator.isValidEmail("abc+xyz@bl.co.in"));
+        System.out.println("Email 'abc@bl' Valid: " + validator.isValidEmail("abc@bl"));
+
+        try {
+            validator.validateEmail("abc.xyz@bl.co.in");
+            System.out.println("Validation for 'abc.xyz@bl.co.in' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
+
+        try {
+            validator.validateEmail("abc@bl");
+            System.out.println("Validation for 'abc@bl' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
     }
 }
