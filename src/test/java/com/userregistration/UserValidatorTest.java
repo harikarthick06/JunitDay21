@@ -288,4 +288,208 @@ class UserValidatorTest {
             assertTrue(validator.validatePassword("Hari@123"));
         }
     }
+
+    // UC6: Password Upper Case Validation
+    @Nested
+    @DisplayName("UC6: Password Must Have At Least 1 Upper Case")
+    class PasswordUpperCaseTests {
+
+        @Test
+        @DisplayName("Happy test: Password with uppercase should be valid")
+        void testPasswordWithUppercaseValid() {
+            assertTrue(validator.isValidPassword("Hari@123"));
+            assertTrue(validator.isValidPassword("HELLO@123"));
+        }
+
+        @Test
+        @DisplayName("Sad test: Password without uppercase should be invalid")
+        void testPasswordWithoutUppercaseSad() {
+            assertFalse(validator.isValidPassword("hello@123"));
+            assertFalse(validator.isValidPassword("test@1234"));
+        }
+    }
+
+    // UC7: Password Numeric Number Validation
+    @Nested
+    @DisplayName("UC7: Password Must Have At Least 1 Numeric Number")
+    class PasswordNumericTests {
+        
+        @Test
+        @DisplayName("Happy test: Password with numeric should be valid")
+        void testPasswordWithNumericValid() {
+            assertTrue(validator.isValidPassword("Hari@123"));
+            assertTrue(validator.isValidPassword("Test@1234"));
+        }
+
+        @Test
+        @DisplayName("Sad test: Password without numeric should be invalid")
+        void testPasswordWithoutNumericSad() {
+            assertFalse(validator.isValidPassword("Hari@abc"));
+            assertFalse(validator.isValidPassword("Test@abc"));
+        }
+    }    // UC8: Password Special Character Validation
+    @Nested
+    @DisplayName("UC8: Password Must Have Exactly 1 Special Character")
+    class PasswordSpecialCharacterTests {
+
+        @Test
+        @DisplayName("Happy test: Password with exactly 1 special char should be valid")
+        void testPasswordWithOneSpecialCharValid() {
+            assertTrue(validator.isValidPassword("Hari@123"));
+            assertTrue(validator.isValidPassword("Test#1234"));
+            assertTrue(validator.isValidPassword("Hello$1234"));
+        }
+
+        @Test
+        @DisplayName("Sad test: Password without special char should be invalid")
+        void testPasswordWithoutSpecialCharSad() {
+            assertFalse(validator.isValidPassword("Hari1234"));
+        }
+
+        @Test
+        @DisplayName("Sad test: Password with multiple special chars should be invalid")
+        void testPasswordWithMultipleSpecialCharsSad() {
+            assertFalse(validator.isValidPassword("Hari@#123"));
+            assertFalse(validator.isValidPassword("Test@$1234"));
+        }
+    }
+
+    // UC10: Parameterized Email Validation Tests
+    @Nested
+    @DisplayName("UC10: Parameterized Email Validation")
+    class ParameterizedEmailTests {
+
+        @Test
+        @DisplayName("Happy test: Multiple valid email samples should pass")
+        void testMultipleValidEmailSamples() {
+            String[] validEmails = {
+                    "abc@bl.co.in",
+                    "abc.xyz@bl.co.in",
+                    "abc+xyz@bl.co.in",
+                    "abc_xyz@bl.co.in",
+                    "abc-xyz@bl.co.in",
+                    "a@bl.co.in",
+                    "abc123@test.com"
+            };
+
+            for (String email : validEmails) {
+                assertTrue(validator.isValidEmail(email), "Email " + email + " should be valid");
+            }
+        }
+
+        @Test
+        @DisplayName("Sad test: Multiple invalid email samples should fail")
+        void testMultipleInvalidEmailSamples() {
+            String[] invalidEmails = {
+                    "abc",
+                    "abc@",
+                    "@bl.co.in",
+                    "abc@bl",
+                    "abc..xyz@bl.co.in",
+                    "abc xyz@bl.co.in"
+            };
+
+            for (String email : invalidEmails) {
+                assertFalse(validator.isValidEmail(email), "Email " + email + " should be invalid");
+            }
+        }
+    }
+
+    // UC11: Custom Exception Handling for All Fields
+    @Nested
+    @DisplayName("UC11: Custom Exception Handling")
+    class CustomExceptionTests {
+
+        @Test
+        @DisplayName("Happy test: Valid entries should not throw exception")
+        void testValidEntriesNoException() throws InvalidUserDetailException {
+            // All should pass without throwing exceptions
+            assertTrue(validator.validateFirstName("Hari"));
+            assertTrue(validator.validateLastName("Karthick"));
+            assertTrue(validator.validateEmail("abc@bl.co.in"));
+            assertTrue(validator.validateMobile("91 9919819801"));
+            assertTrue(validator.validatePassword("Hari@123"));
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid first name should throw INVALID_FIRST_NAME exception")
+        void testInvalidFirstNameException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validateFirstName("hari");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_FIRST_NAME, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid last name should throw INVALID_LAST_NAME exception")
+        void testInvalidLastNameException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validateLastName("karthick");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_LAST_NAME, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid email should throw INVALID_EMAIL exception")
+        void testInvalidEmailException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validateEmail("abc@bl");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_EMAIL, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid mobile should throw INVALID_MOBILE exception")
+        void testInvalidMobileException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validateMobile("9919819801");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_MOBILE, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid password should throw INVALID_PASSWORD exception")
+        void testInvalidPasswordException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validatePassword("hari@123");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_PASSWORD, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid password (no uppercase) should throw exception with correct type")
+        void testInvalidPasswordNoUppercaseException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validatePassword("hello@123");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_PASSWORD, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid password (no number) should throw exception with correct type")
+        void testInvalidPasswordNoNumberException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validatePassword("Hello@abc");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_PASSWORD, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid password (no special char) should throw exception with correct type")
+        void testInvalidPasswordNoSpecialCharException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validatePassword("Hello1234");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_PASSWORD, exception.getType());
+        }
+
+        @Test
+        @DisplayName("Sad test: Invalid password (multiple special chars) should throw exception")
+        void testInvalidPasswordMultipleSpecialCharsException() {
+            InvalidUserDetailException exception = assertThrows(InvalidUserDetailException.class, () -> {
+                validator.validatePassword("Hello@#1234");
+            });
+            assertEquals(InvalidUserDetailException.ExceptionType.INVALID_PASSWORD, exception.getType());
+        }
+    }
 }
