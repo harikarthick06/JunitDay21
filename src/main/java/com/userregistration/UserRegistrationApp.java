@@ -23,5 +23,24 @@ public class UserRegistrationApp {
         } catch (InvalidUserDetailException e) {
             System.out.println("Validation failed: " + e.getMessage());
         }
+
+        System.out.println("\n===== UC2: Last Name Validation =====");
+        System.out.println("Last Name 'Karthick' Valid: " + validator.isValidLastName("Karthick"));
+        System.out.println("Last Name 'karthick' Valid: " + validator.isValidLastName("karthick"));
+        System.out.println("Last Name 'Ka' Valid: " + validator.isValidLastName("Ka"));
+
+        try {
+            validator.validateLastName("Karthick");
+            System.out.println("Validation for 'Karthick' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
+
+        try {
+            validator.validateLastName("karthick");
+            System.out.println("Validation for 'karthick' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
     }
 }
