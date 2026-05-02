@@ -81,5 +81,25 @@ public class UserRegistrationApp {
         } catch (InvalidUserDetailException e) {
             System.out.println("Validation failed: " + e.getMessage());
         }
+
+        System.out.println("\n===== UC5: Password Validation =====");
+        System.out.println("Password 'Hari@123' Valid: " + validator.isValidPassword("Hari@123"));
+        System.out.println("Password 'Password@1' Valid: " + validator.isValidPassword("Password@1"));
+        System.out.println("Password 'Hari@1' Valid: " + validator.isValidPassword("Hari@1"));
+        System.out.println("Password 'hari@123' Valid: " + validator.isValidPassword("hari@123"));
+
+        try {
+            validator.validatePassword("Hari@123");
+            System.out.println("Validation for 'Hari@123' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
+
+        try {
+            validator.validatePassword("hari@123");
+            System.out.println("Validation for 'hari@123' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
     }
 }
