@@ -5,10 +5,23 @@ public class UserRegistrationApp {
     public static void main(String[] args) {
         UserValidator validator = new UserValidator();
 
-        System.out.println("First Name Valid: " + validator.isValidFirstName("Hari"));
-        System.out.println("Last Name Valid: " + validator.isValidLastName("Karthick"));
-        System.out.println("Email Valid: " + validator.isValidEmail("abc.xyz@bl.co.in"));
-        System.out.println("Mobile Valid: " + validator.isValidMobile("91 9919819801"));
-        System.out.println("Password Valid: " + validator.isValidPassword("Hari@123"));
+        System.out.println("===== UC1: First Name Validation =====");
+        System.out.println("First Name 'Hari' Valid: " + validator.isValidFirstName("Hari"));
+        System.out.println("First Name 'hari' Valid: " + validator.isValidFirstName("hari"));
+        System.out.println("First Name 'Ha' Valid: " + validator.isValidFirstName("Ha"));
+
+        try {
+            validator.validateFirstName("Hari");
+            System.out.println("Validation for 'Hari' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
+
+        try {
+            validator.validateFirstName("hari");
+            System.out.println("Validation for 'hari' passed!");
+        } catch (InvalidUserDetailException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+        }
     }
 }
