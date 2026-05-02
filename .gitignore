@@ -1,0 +1,16 @@
+# Maven
+target/
+*.jar
+*.war
+*.zip
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+
+# Logs
+*.log
