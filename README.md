@@ -19,24 +19,28 @@ src/
 ## ✅ Completed Use Cases
 
 ### UC1: First Name Validation
+
 - **Feature Branch**: `feature/UC1-FirstName`
 - **Rules**: Starts with uppercase, minimum 3 chars, only letters
 - **Tests**: 7 test cases (happy & sad)
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC2: Last Name Validation
+
 - **Feature Branch**: `feature/UC2-LastName`
 - **Rules**: Starts with uppercase, minimum 3 chars, only letters
 - **Tests**: 6 test cases (happy & sad)
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC3: Email Validation
+
 - **Feature Branch**: `feature/UC3-Email`
-- **Rules**: Valid email format, supports special chars (. + - _), domain extension required
+- **Rules**: Valid email format, supports special chars (. + - \_), domain extension required
 - **Tests**: 7 test cases (happy & sad)
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC4: Mobile Validation
+
 - **Feature Branch**: `feature/UC4-Mobile`
 - **Rules**: Format: CC (2 digits) + Space + Phone (10 digits)
 - **Example**: "91 9919819801"
@@ -44,29 +48,34 @@ src/
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC5: Password Validation - Basic Rules
+
 - **Feature Branch**: `feature/UC5-Password`
 - **Rules**: Min 8 chars, 1 uppercase, 1 digit, exactly 1 special char
 - **Tests**: 8 test cases (happy & sad)
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC6: Password Validation - Upper Case Rule
+
 - **Rules**: Password must have at least 1 uppercase letter
 - **Tests**: Happy & Sad test cases
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC7: Password Validation - Numeric Rule
+
 - **Rules**: Password must have at least 1 numeric digit
 - **Tests**: Happy & Sad test cases
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC8: Password Validation - Special Character Rule
+
 - **Rules**: Password must have exactly 1 special character
 - **Tests**: Happy & Sad test cases (no special char, multiple special chars)
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC9: Email Samples Validation
+
 - **Feature Branch**: `feature/UC9-EmailSamples`
-- **Includes**: 
+- **Includes**:
   - 10 valid email samples
   - 13 invalid email samples
   - Edge cases (null, empty, whitespace)
@@ -74,6 +83,7 @@ src/
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC10: Parameterized Email Validation Tests
+
 - **Framework**: JUnit Jupiter @ParameterizedTest
 - **Coverage**:
   - 10 valid emails (parameterized)
@@ -83,6 +93,7 @@ src/
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC11: Custom Exception Handling - Refactored
+
 - **Exception Types**:
   - `INVALID_FIRST_NAME`
   - `INVALID_LAST_NAME`
@@ -94,6 +105,7 @@ src/
 - **Status**: ✅ COMPLETED & MERGED
 
 ### UC12: Extended Custom Exception Handling
+
 - **Validates**: All fields throw correct custom exceptions
 - **Tests**:
   - Multiple invalid first names
@@ -109,42 +121,46 @@ src/
 
 ## 🧪 Test Coverage Summary
 
-| UC | Test Cases | Type | Status |
-|----|-----------|------|--------|
-| UC1 | 7 | Unit | ✅ PASS |
-| UC2 | 6 | Unit | ✅ PASS |
-| UC3 | 7 | Unit | ✅ PASS |
-| UC4 | 7 | Unit | ✅ PASS |
-| UC5 | 8 | Unit | ✅ PASS |
-| UC6 | 2 | Unit | ✅ PASS |
-| UC7 | 2 | Unit | ✅ PASS |
-| UC8 | 3 | Unit | ✅ PASS |
-| UC9 | 3 | Integration | ✅ PASS |
-| UC10 | 20 | Parameterized | ✅ PASS |
-| UC11 | 5 | Exception | ✅ PASS |
-| UC12 | 6 | Exception | ✅ PASS |
-| **TOTAL** | **76+** | **Mixed** | **✅ ALL PASS** |
+| UC        | Test Cases | Type          | Status          |
+| --------- | ---------- | ------------- | --------------- |
+| UC1       | 7          | Unit          | ✅ PASS         |
+| UC2       | 6          | Unit          | ✅ PASS         |
+| UC3       | 7          | Unit          | ✅ PASS         |
+| UC4       | 7          | Unit          | ✅ PASS         |
+| UC5       | 8          | Unit          | ✅ PASS         |
+| UC6       | 2          | Unit          | ✅ PASS         |
+| UC7       | 2          | Unit          | ✅ PASS         |
+| UC8       | 3          | Unit          | ✅ PASS         |
+| UC9       | 3          | Integration   | ✅ PASS         |
+| UC10      | 20         | Parameterized | ✅ PASS         |
+| UC11      | 5          | Exception     | ✅ PASS         |
+| UC12      | 6          | Exception     | ✅ PASS         |
+| **TOTAL** | **76+**    | **Mixed**     | **✅ ALL PASS** |
 
 ---
 
 ## 🛠️ Build & Test
 
 ### Build the project
+
 ```bash
 mvn clean build
 ```
 
 ### Run all tests
+
 ```bash
 mvn test
 ```
 
 ### View test results
+
 ```bash
 mvn test -Dtest=UserValidatorTest
 ```
 
 ### Run specific UC tests
+
 ```bash
 mvn test -Dtest=UserValidatorTest$ParameterizedEmailValidationTests
 ```
@@ -154,14 +170,17 @@ mvn test -Dtest=UserValidatorTest$ParameterizedEmailValidationTests
 ## 📦 Dependencies
 
 ### Build Tools
+
 - **Java**: 17+
 - **Maven**: 3.8.9+
 
 ### Test Dependencies
+
 - **JUnit Jupiter**: 5.10.0
 - **JUnit Jupiter Params**: 5.10.0 (for parameterized tests)
 
 ### pom.xml Configuration
+
 ```xml
 <dependency>
     <groupId>org.junit.jupiter</groupId>
@@ -182,30 +201,38 @@ mvn test -Dtest=UserValidatorTest$ParameterizedEmailValidationTests
 ## 🔍 Validation Patterns
 
 ### Name Validation (UC1, UC2)
+
 ```regex
 ^[A-Z][a-zA-Z]{2,}$
 ```
+
 - Starts with uppercase
 - Followed by 2+ letters
 
 ### Email Validation (UC3, UC9, UC10)
+
 ```regex
 ^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}(\.[a-zA-Z]{2,4})?$
 ```
-- Alphanumeric with special chars (. + - _)
+
+- Alphanumeric with special chars (. + - \_)
 - Requires @ and domain
 - Supports multiple levels
 
 ### Mobile Validation (UC4)
+
 ```regex
 ^[0-9]{2}\s[0-9]{10}$
 ```
+
 - 2-digit country code
 - Space separator
 - 10-digit phone number
 
 ### Password Validation (UC5-UC8)
+
 Requirements:
+
 - Minimum 8 characters
 - At least 1 uppercase letter (UC6)
 - At least 1 numeric digit (UC7)
@@ -231,6 +258,7 @@ Requirements:
 ## 📊 Git Workflow
 
 ### Feature Branches
+
 ```
 feature/UC1-FirstName
 feature/UC2-LastName
@@ -242,6 +270,7 @@ feature/UC9-EmailSamples (includes UC9-UC12)
 ```
 
 ### Branch Strategy
+
 - Each UC implemented in feature branch
 - All features merged to `dev`
 - `dev` merged to `main` for production
@@ -253,7 +282,7 @@ feature/UC9-EmailSamples (includes UC9-UC12)
 
 **Repository**: harikarthick06/JunitDay21
 **Current Status**: ✅ All UCs Implemented
-**Branches**: main, dev, feature/* (all synced)
+**Branches**: main, dev, feature/\* (all synced)
 **Commits**: 15+ (all documented)
 
 ---
@@ -263,6 +292,7 @@ feature/UC9-EmailSamples (includes UC9-UC12)
 ### UserValidator Methods
 
 #### Boolean Validation Methods
+
 ```java
 boolean isValidFirstName(String firstName)
 boolean isValidLastName(String lastName)
@@ -272,6 +302,7 @@ boolean isValidPassword(String password)
 ```
 
 #### Throwing Validation Methods
+
 ```java
 boolean validateFirstName(String firstName) throws InvalidUserDetailException
 boolean validateLastName(String lastName) throws InvalidUserDetailException
@@ -285,6 +316,7 @@ boolean validatePassword(String password) throws InvalidUserDetailException
 ## 📝 Example Usage
 
 ### Happy Test Case
+
 ```java
 UserValidator validator = new UserValidator();
 
@@ -304,6 +336,7 @@ try {
 ```
 
 ### Sad Test Case
+
 ```java
 // Invalid input - boolean returns false
 if (!validator.isValidPassword("weak")) {
@@ -350,6 +383,7 @@ try {
 ## 🎓 Learning Outcomes
 
 This project demonstrates:
+
 - ✓ Unit testing with JUnit 5
 - ✓ Parameterized testing
 - ✓ Custom exceptions
